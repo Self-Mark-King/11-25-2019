@@ -7,7 +7,7 @@ class Branch (models.Model):
 
     def __str__ (self):
         return (
-            f"Bank Name : {self.branch_name} | Branch Name : {self.location_city}"
+            f"Bank Name : {self.branch_name} | Location : {self.location_city}"
         )
 
     class Meta:
