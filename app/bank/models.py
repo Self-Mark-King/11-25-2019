@@ -13,35 +13,32 @@ class Branch (models.Model):
     class Meta:
         verbose_name_plural = "Branches"
 
-class Client (models.Model):
-    client_name = models.CharField(max_length=50)
-    client_email = models.EmailField(max_length=200)
 
-    branch models.ForeignKey(
+class Client (models.Model):
+    client_name = models.CharField(max_length=50, default="")
+    client_email = models.EmailField(max_length=200, default="")
+
+    branch_connection =  models.ForeignKey(
         Branch,
         on_delete = models.CASCADE
         )   
 
     def __str__ (self):
         return (
-            f"{self.client_name} | {self.branch}" 
+            f"{self.client_name} | {self.branch_connection}" 
         )
 
 class Account(models.Model):
-    has_checking = models.BooleanField
-    has_savings = models.BooleanField
-    checking_balance = models.FloatField(max_length=500)
-    checking_balance = =models.FloatField(max_length=500)
-    client = models.OneToOneField(
-        client,
+    checking_balance = models.FloatField(max_length=500, default=0)
+    # checking_balance = models.FloatField(max_length=500)
+    client_connection = models.OneToOneField(
+        Client,
         on_delete = models.CASCADE
     )
 
     def __str__(self):
         return(
-            f"{self.client.client_name} | Checking Balance :
-            {self.checking_balance} | Savings Balance :
-            {self.savings_balance}"
+            f"{self.client_connection.client_name} | Checking Balance :{self.checking_balance}"
         )
 
 
